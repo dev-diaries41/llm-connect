@@ -1,0 +1,13 @@
+# Dirs
+__pycache__/
+venv/
+build/
+*.egg-info
+output/
+models/
+dev/
+logs/
+
+# Files
+.env
+TODO.md

@@ -1,0 +1,18 @@
+from abc import abstractmethod, ABC
+from typing import List, Optional, Dict, Type
+from llm_connect.schemas.llm import Message
+from llm_connect.types import JsonOutput
+
+
+class LLMProvider(ABC):
+    @abstractmethod
+    def generate_text(self, prompt: str, history: Optional[List[Message]] = None) -> str:
+        raise NotImplementedError
+    
+    @abstractmethod
+    def generate_json(self, prompt: str, format: Type[JsonOutput], images: Optional[List[str]] = None, history: Optional[List[Message]] = None) -> JsonOutput: 
+        raise NotImplementedError
+    
+    @abstractmethod
+    def generate_text_from_images(self, prompt: str, images: List[str], history: Optional[List[Message]] = None) -> str:
+        raise NotImplementedError
