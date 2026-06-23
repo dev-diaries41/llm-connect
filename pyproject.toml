@@ -16,5 +16,5 @@ dependencies = [
 ]
 
 
-[tool.setuptools]
-packages = ["llm_connect"]
+[tool.setuptools.packages.find]
+include = ["llm_connect*"]
