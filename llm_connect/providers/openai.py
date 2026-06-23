@@ -1,7 +1,7 @@
 from typing import Optional, List, Type
 
 from llm_connect.providers.llm_provider import LLMProvider
-from llm_connect.schemas.llm import LLMClientConfig, Message, ImageMessage, ImageContent
+from llm_connect.schemas.llm import LLMProviderConfig, Message, ImageMessage, ImageContent
 from llm_connect.types import JsonOutput
 
 from openai import OpenAI
@@ -9,13 +9,13 @@ from openai import OpenAI
 
 
 class OpenAIProvider(LLMProvider):
-    def __init__(self, api_key: str, config: LLMClientConfig):
+    def __init__(self, api_key: str, config: LLMProviderConfig):
         self.openai = OpenAI(api_key=api_key)
         self.config = config
 
     def generate_text(self, prompt: str, history: Optional[List[Message]] = None) -> str:
         response =  self.openai.responses.create(
-        model=self.config.model_name,
+        model=self.config.model,
         input = [
             Message(role="system", content=self.config.system_prompt),
             *(history or []),
@@ -26,7 +26,7 @@ class OpenAIProvider(LLMProvider):
     
     def generate_json(self, prompt:str, format: Type[JsonOutput], images = None, history = None):
         response = self.openai.responses.parse(
-            model=self.config.model_name,
+            model=self.config.model,
             input=[
                     Message(role="system", content=self.config.system_prompt),
                     *(history or []),
@@ -45,7 +45,7 @@ class OpenAIProvider(LLMProvider):
     #TODO
     def generate_text_from_images(self, prompt, images, history = None):
         response = self.openai.responses.create(
-            model=self.config.model_name,
+            model=self.config.model,
             input=[
                 Message(role="system", content=self.config.system_prompt),
                 *(history or []),

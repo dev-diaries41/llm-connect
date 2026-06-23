@@ -2,9 +2,9 @@ from pydantic import BaseModel, Field
 from typing import Optional, List, Literal
 from openai.types import ResponsesModel
 
-class LLMClientConfig(BaseModel):
+class LLMProviderConfig(BaseModel):
     system_prompt: str
-    model_name: str | ResponsesModel
+    model: str | ResponsesModel
     temperature: float = Field(default=0.1)
     max_output_tokens: int = Field(default=4000)
     stream: bool = Field(default=False)
