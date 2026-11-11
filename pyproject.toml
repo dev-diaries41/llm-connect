@@ -9,12 +9,11 @@ description = "Lightweight library for connecting to LLM providers"
 requires-python = ">=3.10"
 
 dependencies = [
-    "openai==2.14.0",
-    "pytest==9.0.2",
-    "pytest-asyncio",
+    "openai>=2.14.0",
+    "pytest>=9.0.2",
+    "pytest-asyncio>=1.0.0",
     "pydantic>=2.0,<3.0"
 ]
-
 
 [tool.setuptools.packages.find]
 include = ["llm_connect*"]
